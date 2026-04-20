@@ -1,0 +1,847 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════
+   CSS VARIABLES — DARK (DEFAULT)
+═══════════════════════════════════ */
+:root {
+  --bg-color: #0b0f1a;
+  --background: #0b0f1a;
+  --background-secondary: #111827;
+  --text-color: #e5e7eb;
+  --foreground: #e5e7eb;
+  --foreground-muted: #9ca3af;
+  --accent-color: #3b82f6;
+  --accent: #3b82f6;
+  --primary: #3b82f6;
+  --primary-light: #60a5fa;
+  --primary-hover: #60a5fa;
+  --primary-active: #1d4ed8;
+  --primary-glow: rgba(59, 130, 246, 0.45);
+  --accent-glow: rgba(59, 130, 246, 0.35);
+  --interactive-hover: rgba(255, 255, 255, 0.06);
+  --interactive-hover-text: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-hover: rgba(255, 255, 255, 0.08);
+  --card-hover-border: rgba(59, 130, 246, 0.35);
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-focus: rgba(59, 130, 246, 0.6);
+  --navbar-bg: rgba(11, 15, 26, 0.85);
+  --sidebar-bg: rgba(10, 10, 24, 0.4);
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.45);
+  --danger: #f43f5e;
+  --danger-glow: rgba(244, 63, 94, 0.45);
+  --warning: #f59e0b;
+  --warning-glow: rgba(245, 158, 11, 0.45);
+  --glow-sm: 0 0 20px -4px var(--primary-glow);
+  --glow-md: 0 0 40px -8px var(--primary-glow);
+  --glow-lg: 0 0 70px -12px var(--primary-glow);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-card-hover: 0 16px 48px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+  --blob-1: rgba(59, 130, 246, 0.4);
+  --blob-2: rgba(37, 99, 235, 0.3);
+  --blob-3: rgba(29, 78, 216, 0.25);
+  --cursor-color: rgba(59, 130, 246, 0.85);
+  --cursor-trail: rgba(96, 165, 250, 0.35);
+  --dot-grid-color: rgba(59, 130, 246, 0.06);
+  --login-glow: rgba(59, 130, 246, 0.18);
+  --particle-opacity: 1;
+}
+
+/* ═══════════════════════════════════
+   CSS VARIABLES — LIGHT
+═══════════════════════════════════ */
+[data-theme="light"] {
+  --bg-color: #f5f7fb;
+  --background: #f5f7fb;
+  --background-secondary: #ffffff;
+  --text-color: #111827;
+  --foreground: #111827;
+  --foreground-muted: #4b5563;
+  --accent-color: #2563eb;
+  --accent: #2563eb;
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-hover: #1d4ed8;
+  --primary-active: #1e40af;
+  --primary-glow: rgba(37, 99, 235, 0.2);
+  --accent-glow: rgba(37, 99, 235, 0.15);
+  --interactive-hover: rgba(0, 0, 0, 0.05);
+  --interactive-hover-text: var(--primary);
+  --card-bg: #ffffff;
+  --card: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-hover: #ffffff;
+  --card-hover-border: rgba(37, 99, 235, 0.3);
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --input-border: rgba(0, 0, 0, 0.12);
+  --input-focus: rgba(37, 99, 235, 0.3);
+  --navbar-bg: rgba(245, 247, 251, 0.92);
+  --sidebar-bg: rgba(240, 242, 248, 0.85);
+  --blob-1: rgba(37, 99, 235, 0.12);
+  --blob-2: rgba(29, 78, 216, 0.1);
+  --blob-3: rgba(59, 130, 246, 0.08);
+  --shadow-card: 0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.07);
+  --cursor-color: rgba(37, 99, 235, 0.8);
+  --cursor-trail: rgba(59, 130, 246, 0.25);
+  --dot-grid-color: rgba(37, 99, 235, 0.08);
+  --login-glow: rgba(37, 99, 235, 0.1);
+  --particle-opacity: 0.5;
+}
+
+/* ═══════════════════════════════════
+   GLOBAL TRANSITIONS (theme switch)
+═══════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(.no-transition) {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* GPU-friendly animations skip the global transition */
+.blob, .particle-canvas, .cursor-glow, .cursor-trail {
+  transition: none !important;
+}
+
+html, body {
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════ */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cursor-color);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  box-shadow: 0 0 16px 4px var(--cursor-color);
+  will-change: left, top;
+}
+
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cursor-trail);
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  will-change: left, top;
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+.cursor-glow.hovering {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 24px 8px var(--cursor-color);
+}
+
+.cursor-trail.hovering {
+  width: 52px;
+  height: 52px;
+  border-color: var(--primary-glow);
+}
+
+/* ═══════════════════════════════════
+   GLASS CARD
+═══════════════════════════════════ */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--card-hover-border);
+}
+
+/* Static glass card — no hover lift */
+.glass-card-static {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+}
+
+/* ═══════════════════════════════════
+   BUTTONS
+═══════════════════════════════════ */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-active));
+  color: white;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 4px 16px -4px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+  box-shadow: 0 0 20px var(--primary-glow), 0 4px 24px -4px var(--primary-glow);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+  background: var(--primary-active);
+}
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+  color: var(--primary-light);
+}
+
+.btn-secondary:active {
+  transform: scale(0.96);
+}
+
+/* ═══════════════════════════════════
+   INPUT FIELDS
+═══════════════════════════════════ */
+.input-glow {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--foreground);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  border-radius: 0.75rem;
+}
+
+.input-glow::placeholder {
+  color: var(--foreground-muted);
+  opacity: 0.7;
+}
+
+.input-glow:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--input-focus);
+}
+
+/* ═══════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #facc15, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heading-glow {
+  text-shadow: 0 0 60px rgba(59, 130, 246, 0.18), 0 0 120px rgba(59, 130, 246, 0.08);
+}
+
+[data-theme="light"] .heading-glow {
+  text-shadow: none;
+}
+
+.animate-text-glow {
+  animation: text-glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes text-glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.5)); }
+  50% { filter: drop-shadow(0 0 28px rgba(96, 165, 250, 0.7)); }
+}
+
+[data-theme="light"] .animate-text-glow {
+  animation: none;
+  filter: none;
+}
+
+/* ═══════════════════════════════════
+   SECTION DIVIDER
+═══════════════════════════════════ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+/* ═══════════════════════════════════
+   ANIMATED BACKGROUND + BLOBS
+═══════════════════════════════════ */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--background);
+  will-change: background-color;
+  transition: background-color 0.3s ease !important;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, var(--background-secondary), var(--background) 70%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+  animation: float 22s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--blob-1);
+  top: -120px;
+  right: -80px;
+  animation-duration: 22s;
+}
+
+.blob-2 {
+  width: 380px;
+  height: 380px;
+  background: var(--blob-2);
+  bottom: -80px;
+  left: -60px;
+  animation-delay: -7s;
+  animation-duration: 26s;
+}
+
+.blob-3 {
+  width: 280px;
+  height: 280px;
+  background: var(--blob-3);
+  top: 40%;
+  left: 35%;
+  animation-delay: -13s;
+  animation-duration: 18s;
+}
+
+@keyframes float {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(25px, -40px) scale(1.07); }
+  50%  { transform: translate(-15px, 20px) scale(0.95); }
+  75%  { transform: translate(10px, 30px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ═══════════════════════════════════
+   PARTICLE CANVAS
+═══════════════════════════════════ */
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--particle-opacity);
+}
+
+/* ═══════════════════════════════════
+   DOT GRID BACKGROUND
+═══════════════════════════════════ */
+.dot-grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* ═══════════════════════════════════
+   LOGIN CENTER GLOW
+═══════════════════════════════════ */
+.login-center-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--login-glow) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════
+   HERO FLOATING ICONS
+═══════════════════════════════════ */
+.hero-floating-icon {
+  position: absolute;
+  color: var(--primary);
+  opacity: 0.3;
+  filter: drop-shadow(0 0 8px var(--primary-glow));
+  pointer-events: none;
+}
+
+[data-theme="light"] .hero-floating-icon {
+  opacity: 0.2;
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.3));
+}
+
+/* ═══════════════════════════════════
+   NAVBAR
+═══════════════════════════════════ */
+.navbar-glass {
+  background: var(--navbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-active-pill {
+  background: var(--primary-glow);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="light"] .nav-active-pill {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+/* ═══════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════ */
+.sidebar-glass {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* ═══════════════════════════════════
+   TAG PILL
+═══════════════════════════════════ */
+.tag-pill {
+  background: var(--card);
+  border: 1px solid var(--border-color);
+  color: var(--foreground-muted);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  transition: all 0.2s ease !important;
+}
+
+.tag-pill:hover {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: white;
+}
+
+[data-theme="light"] .tag-pill:hover {
+  color: var(--primary);
+}
+
+/* ═══════════════════════════════════
+   QUESTION CARD STATES
+═══════════════════════════════════ */
+.needs-attention-card {
+  border-left: 2px solid rgba(244, 63, 94, 0.35) !important;
+}
+
+.resolved-card {
+  border-left: 2px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+/* Override glass-card hover transform for question cards —
+   framer-motion's whileHover handles the lift/scale instead.
+   Prevents double-transform conflicts. */
+.question-card-hover {
+  transform: none !important;
+}
+
+.question-card-hover:hover {
+  transform: none !important;
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--card-hover-border);
+}
+
+/* ═══════════════════════════════════
+   SKELETON
+═══════════════════════════════════ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s infinite linear;
+  border-radius: 0.5rem;
+}
+
+[data-theme="light"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.09) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ═══════════════════════════════════
+   NOTIFICATION PULSE
+═══════════════════════════════════ */
+@keyframes notification-pulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.6); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-notification-pulse {
+  animation: notification-pulse 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════
+   GRADIENT SHIFT (top loading bar)
+═══════════════════════════════════ */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ═══════════════════════════════════
+   VOTE ACTIVE STATES
+═══════════════════════════════════ */
+.vote-active-up {
+  box-shadow: 0 0 12px -2px rgba(59, 130, 246, 0.5);
+}
+
+.vote-active-down {
+  box-shadow: 0 0 12px -2px rgba(244, 63, 94, 0.5);
+}
+
+/* ═══════════════════════════════════
+   SCROLLBAR STYLING
+═══════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-glow);
+}
+
+/* ═══════════════════════════════════
+   SELECTION
+═══════════════════════════════════ */
+::selection {
+  background: var(--primary-glow);
+  color: var(--foreground);
+}
+
+/* ═══════════════════════════════════
+   SHADOW GLASS (dropdown)
+═══════════════════════════════════ */
+.shadow-glass {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+[data-theme="light"] .shadow-glass {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* ═══════════════════════════════════
+   BADGE SHIMMER (unanswered badge)
+═══════════════════════════════════ */
+@keyframes badge-shimmer {
+  0%, 100% { background-color: rgba(244, 63, 94, 0.1); }
+  50%       { background-color: rgba(244, 63, 94, 0.18); }
+}
+
+.animate-badge-shimmer {
+  animation: badge-shimmer 2.5s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE OVERRIDES
+═══════════════════════════════════ */
+
+/* Ensure profile / badge cards look good in light mode */
+[data-theme="light"] .glass-card {
+  background: var(--card);
+  border-color: var(--card-border);
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .glass-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--card-hover-border);
+}
+
+/* Dark overlay on theme card labels stays readable */
+[data-theme="light"] .bg-black\/40 {
+  background: rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Input fields light mode */
+[data-theme="light"] .input-glow {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111827;
+}
+
+[data-theme="light"] .input-glow::placeholder {
+  color: #6b7280;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE UTILITIES
+═══════════════════════════════════ */
+@media (max-width: 640px) {
+  .blob-1, .blob-2, .blob-3 {
+    opacity: 0.35;
+  }
+  .hero-floating-icon {
+    display: none !important;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none !important; }
+  .animate-text-glow { animation: none !important; }
+  .animate-notification-pulse { animation: none !important; }
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — NAVBAR & INTERACTIVE ELEMENT OVERRIDES
+   Fix hover:text-white and hover:bg-white/[0.04] which
+   are invisible in light mode
+═══════════════════════════════════ */
+
+/* Navbar icon buttons - hover in light mode */
+[data-theme="light"] .navbar-glass button:hover,
+[data-theme="light"] .navbar-glass a:not(.btn-primary):hover {
+  color: var(--primary) !important;
+}
+
+/* Navbar transparent hover backgrounds */
+[data-theme="light"] .navbar-glass .hover\:bg-white\/\[0\.04\]:hover {
+  background-color: var(--interactive-hover) !important;
+}
+
+/* Sidebar hover fix */
+[data-theme="light"] .sidebar-glass a:hover,
+[data-theme="light"] .sidebar-glass button:hover {
+  color: var(--primary) !important;
+}
+
+[data-theme="light"] .sidebar-glass .hover\:bg-white\/\[0\.04\]:hover {
+  background-color: var(--interactive-hover) !important;
+}
+
+/* Profile dropdown background */
+[data-theme="light"] .shadow-glass {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — GLASS CARD STATIC
+═══════════════════════════════════ */
+[data-theme="light"] .glass-card-static {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — TAG & BADGE PILLS
+═══════════════════════════════════ */
+[data-theme="light"] .tag-pill:hover {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — GRADIENT TEXT
+═══════════════════════════════════ */
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — SCROLL INDICATOR (homepage)
+═══════════════════════════════════ */
+[data-theme="light"] .border-white\/15 {
+  border-color: rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — HERO BADGE PILL
+═══════════════════════════════════ */
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — HEADING BARS
+   (the vertical accent bar before headings)
+═══════════════════════════════════ */
+[data-theme="light"] .heading-glow {
+  text-shadow: none;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — ANSWER SECTION BORDER
+═══════════════════════════════════ */
+[data-theme="light"] .border-t {
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — MODAL BACKDROP
+═══════════════════════════════════ */
+[data-theme="light"] .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ═══════════════════════════════════
+   UTILITY — NAV ICON BUTTON
+   Fully theme-aware icon button for navbars
+═══════════════════════════════════ */
+.nav-icon-btn {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  color: var(--foreground-muted);
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+}
+
+.nav-icon-btn:hover {
+  color: var(--interactive-hover-text);
+  background-color: var(--interactive-hover);
+}
+
+/* ═══════════════════════════════════
+   UTILITY — SECTION ANIMATIONS
+═══════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* ═══════════════════════════════════
+   FOCUS VISIBLE — ACCESSIBILITY
+═══════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
